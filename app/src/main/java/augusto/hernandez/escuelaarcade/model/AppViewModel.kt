@@ -26,16 +26,17 @@ class AppViewModel : ViewModel() {
     private val _courses = MutableLiveData<MutableList<Curso>?>()
     private val _loginStatus = MutableLiveData<Resource<Usuario>>()
     //Datos LiveData públicos
-    val courses:LiveData<MutableList<Curso>?> = _courses
-    val loginStatus:LiveData<Resource<Usuario>> = _loginStatus
+    val courses:LiveData<MutableList<Curso>?> get()= _courses
+    val loginStatus:LiveData<Resource<Usuario>> get()= _loginStatus
     //Datos de Firebase
-    var user:Usuario = Usuario()
+    private val _user = MutableLiveData<Usuario?>()
+    val user:LiveData<Usuario?> get()= _user
     private val database:FirebaseFirestore = Firebase.firestore
     private val auth:FirebaseUser= FirebaseAuth.getInstance().currentUser!!
 
     fun fetchCategories() {
         // Este es solo un ejemplo, debes implementar tu propia lógica de red aquí
-        val fetchedCategories = user.registros
+        val fetchedCategories = _user.value?.registros
         _courses.value = fetchedCategories
     }
 
@@ -48,6 +49,7 @@ class AppViewModel : ViewModel() {
                     .get()
                     .addOnSuccessListener { doc ->
                         val returnedUser = doc.toObject<Usuario>()
+                        Log.d(LOGINDATA,"datos de usuario obtenidos de returnedUser: ${returnedUser.toString()}")
                         continuation.resume(returnedUser) {
                             it.printStackTrace()
                         }
@@ -91,12 +93,12 @@ class AppViewModel : ViewModel() {
                 val returnedUser = loginUser()
                 if (returnedUser != null) {
                     _loginStatus.value = Resource.Success(returnedUser)
-                    user = returnedUser
+                    _user.value = returnedUser
                 } else {
                     val newUser = customUser()
                     initUser(newUser)
                     _loginStatus.value = Resource.Success(newUser)
-                    user = newUser
+                    _user.value = newUser
                 }
             } catch (e: Exception) {
                 _loginStatus.value = Resource.Error("Error de inicio de sesión")

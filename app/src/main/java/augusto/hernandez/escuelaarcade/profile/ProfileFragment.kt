@@ -26,6 +26,7 @@ class ProfileFragment:Fragment() {
     ): View {
         val fragmentBinding = ProfileFragmentBinding.inflate(inflater, container, false)
         binding = fragmentBinding
+        binding.lifecycleOwner = this
         return fragmentBinding.root
     }
 

@@ -9,6 +9,10 @@ data class Usuario(
     val registros:MutableList<Curso>?
 ){
     constructor() : this(null,null,null)
+
+    override fun toString(): String {
+        return "Usuario(id=$id, perfil=$perfil, registros=$registros)"
+    }
 }
 data class Perfil(
     val cursos: MutableList<String> = mutableListOf(),

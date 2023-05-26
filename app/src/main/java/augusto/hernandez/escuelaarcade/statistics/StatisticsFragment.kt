@@ -28,6 +28,7 @@ class StatisticsFragment:Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = StatisticsFragmentBinding.inflate(layoutInflater)
+        binding.lifecycleOwner = this
         return binding.root
     }
 

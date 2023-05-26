@@ -25,6 +25,7 @@ class HomeFragment:Fragment() {
     ): View {
         val fragmentBinding = HomeFragmentBinding.inflate(inflater, container, false)
         binding = fragmentBinding
+        binding.lifecycleOwner = this
         return fragmentBinding.root
     }
 
