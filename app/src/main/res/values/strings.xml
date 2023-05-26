@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Escuela Arcade</string>
+    <string name="logo">Logo</string>
+    <string name="home_fragment">Cursos</string>
+    <string name="statistics_fragment">Estadísticas</string>
+    <string name="profile_fragment">Perfil</string>
+    <string name="nav_menu">Menú de navegación</string>
+    <string name="cursos_activos">Cursos activos</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="sync_dialog">"No se han podido obtener datos de sincronización. ¿Desea intentar de nuevo?"</string>
+    <string name="usuario">usuario</string>
+    <string name="email">email</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="bienvenido">Bienvenido!</string>
+    <string name="datos_no_disponibles">Datos no disponibles</string>
+    <string name="no_login">No se pueden sincronizar datos. Comprueba tu conexión a internet, cierra sesión y vuelve a iniciar sesión para comenzar.</string>
+    <string name="no_connection">sin conexión</string>
+</resources>
