@@ -24,8 +24,7 @@
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/content_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true">
+            android:layout_height="match_parent">
 
             <!-- Toolbar -->
             <com.google.android.material.appbar.MaterialToolbar
@@ -34,6 +33,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 app:titleTextColor="?attr/colorOnPrimary"
+                android:fitsSystemWindows="true"
                 app:title="@string/app_name" />
 
             <!-- Add your main content here -->

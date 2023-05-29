@@ -16,6 +16,7 @@ import androidx.navigation.ui.setupWithNavController
 import augusto.hernandez.escuelaarcade.R
 import augusto.hernandez.escuelaarcade.databinding.ActivityMainBinding
 import augusto.hernandez.escuelaarcade.model.AppViewModel
+import augusto.hernandez.escuelaarcade.model.Usuario
 import augusto.hernandez.escuelaarcade.model.states.Resource
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.snackbar.Snackbar
@@ -82,6 +83,7 @@ class MainActivity : AppCompatActivity() {
                     binding.noConnection.root.visibility = View.GONE
                     binding.navHostFragment.visibility = View.VISIBLE
                     Snackbar.make(binding.root, "Sesión sincronizada", Snackbar.LENGTH_LONG).show()
+                    //viewModel.setUserOnHomefragment(viewModel.user.value!!)
                 }
                 is Resource.Error -> {
                     // Presentar un AlertDialog para reintentar la operación de inicio de sesión

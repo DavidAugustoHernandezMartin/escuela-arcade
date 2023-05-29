@@ -31,8 +31,7 @@ data class Perfil(
 @Parcelize
 data class Curso(
     val id: String = "",
-    val nombre: String = "",
-    val autor: String = "",
+    var nombre: String = "",
     val progreso:Array<Int> = arrayOf(
         0,0
     ),
@@ -47,7 +46,6 @@ data class Curso(
 
         if (id != other.id) return false
         if (nombre != other.nombre) return false
-        if (autor != other.autor) return false
         if (!progreso.contentEquals(other.progreso)) return false
         if (maxima_puntuacion != other.maxima_puntuacion) return false
         if (ultima_leccion != other.ultima_leccion) return false
@@ -58,7 +56,6 @@ data class Curso(
     override fun hashCode(): Int {
         var result = id.hashCode()
         result = 31 * result + nombre.hashCode()
-        result = 31 * result + autor.hashCode()
         result = 31 * result + progreso.contentHashCode()
         result = 31 * result + maxima_puntuacion.hashCode()
         result = 31 * result + ultima_leccion.hashCode()
@@ -66,6 +63,6 @@ data class Curso(
     }
 
     override fun toString(): String {
-        return "Curso(id='$id', nombre='$nombre', autor='$autor', progreso=${progreso.contentToString()}, maxima_puntuacion=$maxima_puntuacion, ultima_leccion='$ultima_leccion')"
+        return "Curso(id='$id', nombre='$nombre', progreso=${progreso.contentToString()}, maxima_puntuacion=$maxima_puntuacion, ultima_leccion='$ultima_leccion')"
     }
 }

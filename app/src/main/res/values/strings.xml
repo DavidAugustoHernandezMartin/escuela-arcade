@@ -15,4 +15,8 @@
     <string name="datos_no_disponibles">Datos no disponibles</string>
     <string name="no_login">No se pueden sincronizar datos. Comprueba tu conexión a internet, cierra sesión y vuelve a iniciar sesión para comenzar.</string>
     <string name="no_connection">sin conexión</string>
+    <string name="descripcion_curso">Breve descripción del curso</string>
+    <string name="numero_de_lecciones">Lecciones: %1$d</string>
+    <string name="nombre_del_curso">Nombre del curso</string>
+
 </resources>

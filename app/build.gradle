@@ -79,6 +79,8 @@ dependencies {
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
 
+    //Coil
+    implementation 'io.coil-kt:coil:2.3.0'
 
     //testing
     testImplementation 'junit:junit:4.13.2'

@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import augusto.hernandez.escuelaarcade.databinding.HomeFragmentBinding
 import augusto.hernandez.escuelaarcade.model.AppViewModel
+import augusto.hernandez.escuelaarcade.model.HomeViewModel
 
+//TODO Aquí hay que realizar el recyclerview de cursos
 class HomeFragment:Fragment() {
     //Se inicia el viewmodel compartido
-    private val viewModel: AppViewModel by activityViewModels()
-
+    private val viewModel: HomeViewModel by activityViewModels()
+    private val appViewModel:AppViewModel by activityViewModels()
     // Binding object instance corresponding to the fragment_u8.xml layout
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,
     // when the view hierarchy is attached to the fragment.
@@ -33,5 +35,13 @@ class HomeFragment:Fragment() {
         binding.apply {
             dataModel = viewModel
         }
+
+        appViewModel.adaptadorHomeFragment.observe(viewLifecycleOwner) { valor ->
+            if (valor != null) {
+                // Asignar el adaptador al RecyclerView
+                binding.recyclerviewHome.adapter = HomeListAdapter(requireContext(),valor)
+            }
+        }
     }
+
 }

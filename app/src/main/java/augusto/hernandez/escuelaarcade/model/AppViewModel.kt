@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import augusto.hernandez.escuelaarcade.home.HomeFragment
 import augusto.hernandez.escuelaarcade.model.states.Resource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -25,6 +26,11 @@ class AppViewModel : ViewModel() {
     // Datos de MutableLiveData de la aplicación
     private val _courses = MutableLiveData<MutableList<Curso>?>()
     private val _loginStatus = MutableLiveData<Resource<Usuario>>()
+
+    val adaptadorHomeFragment: MutableLiveData<Usuario?> = MutableLiveData(null)
+    fun setUserOnHomefragment(valor: Usuario) {
+        adaptadorHomeFragment.value = valor
+    }
     //Datos LiveData públicos
     val courses:LiveData<MutableList<Curso>?> get()= _courses
     val loginStatus:LiveData<Resource<Usuario>> get()= _loginStatus
@@ -33,6 +39,9 @@ class AppViewModel : ViewModel() {
     val user:LiveData<Usuario?> get()= _user
     private val database:FirebaseFirestore = Firebase.firestore
     private val auth:FirebaseUser= FirebaseAuth.getInstance().currentUser!!
+
+
+
 
     fun fetchCategories() {
         // Este es solo un ejemplo, debes implementar tu propia lógica de red aquí
