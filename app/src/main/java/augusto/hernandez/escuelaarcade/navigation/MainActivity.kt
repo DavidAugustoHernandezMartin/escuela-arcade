@@ -4,9 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -16,11 +15,9 @@ import androidx.navigation.ui.setupWithNavController
 import augusto.hernandez.escuelaarcade.R
 import augusto.hernandez.escuelaarcade.databinding.ActivityMainBinding
 import augusto.hernandez.escuelaarcade.model.AppViewModel
-import augusto.hernandez.escuelaarcade.model.Usuario
 import augusto.hernandez.escuelaarcade.model.states.Resource
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 
 
 class MainActivity : AppCompatActivity() {
@@ -83,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                     binding.noConnection.root.visibility = View.GONE
                     binding.navHostFragment.visibility = View.VISIBLE
                     Snackbar.make(binding.root, "Sesión sincronizada", Snackbar.LENGTH_LONG).show()
-                    //viewModel.setUserOnHomefragment(viewModel.user.value!!)
+
                 }
                 is Resource.Error -> {
                     // Presentar un AlertDialog para reintentar la operación de inicio de sesión
@@ -118,6 +115,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         viewModel.login()
+
     }
 
     fun cerrarSesion(){

@@ -15,9 +15,13 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
+import okhttp3.internal.wait
 
 const val LOGINDATA = "LOGINDATA"
 
@@ -27,10 +31,7 @@ class AppViewModel : ViewModel() {
     private val _courses = MutableLiveData<MutableList<Curso>?>()
     private val _loginStatus = MutableLiveData<Resource<Usuario>>()
 
-    val adaptadorHomeFragment: MutableLiveData<Usuario?> = MutableLiveData(null)
-    fun setUserOnHomefragment(valor: Usuario) {
-        adaptadorHomeFragment.value = valor
-    }
+
     //Datos LiveData públicos
     val courses:LiveData<MutableList<Curso>?> get()= _courses
     val loginStatus:LiveData<Resource<Usuario>> get()= _loginStatus
@@ -57,7 +58,7 @@ class AppViewModel : ViewModel() {
                     .document(auth.uid)
                     .get()
                     .addOnSuccessListener { doc ->
-                        val returnedUser = doc.toObject<Usuario>()
+                         val returnedUser = doc.toObject<Usuario>()
                         Log.d(LOGINDATA,"datos de usuario obtenidos de returnedUser: ${returnedUser.toString()}")
                         continuation.resume(returnedUser) {
                             it.printStackTrace()

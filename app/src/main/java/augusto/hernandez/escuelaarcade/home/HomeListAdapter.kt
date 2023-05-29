@@ -13,9 +13,10 @@ import augusto.hernandez.escuelaarcade.model.CursoGlobal
 import augusto.hernandez.escuelaarcade.model.HomeViewModel
 import augusto.hernandez.escuelaarcade.model.Usuario
 import augusto.hernandez.escuelaarcade.model.data.CourseData
+import com.google.android.material.snackbar.Snackbar
 
 
-class HomeListAdapter(private val context: Context,private val user:Usuario): RecyclerView.Adapter<HomeListAdapter.HomeListViewHolder>() {
+class HomeListAdapter(private val context: Context,private val user:Usuario?): RecyclerView.Adapter<HomeListAdapter.HomeListViewHolder>() {
     private val courseList:Array<CursoGlobal> = CourseData.listaDeCursos
     class HomeListViewHolder(val view: View) : RecyclerView.ViewHolder(view){
         val image:ImageView = view.findViewById(R.id.courseImage)
@@ -41,7 +42,10 @@ class HomeListAdapter(private val context: Context,private val user:Usuario): Re
         holder.lessons.text = context.getString(R.string.numero_de_lecciones,item.numeroDeLecciones)
         holder.image.setImageResource(item.imagen)
         holder.card.setOnClickListener{
-            HomeViewModel.goToCourse(context,user,item.id,item.nombreDeCurso)
+            if (user != null)
+                HomeViewModel.goToCourse(context,user,item.id,item.nombreDeCurso)
+            else
+                Snackbar.make(holder.view,context.getString(R.string.no_login),Snackbar.LENGTH_LONG).show()
         }
     }
 
