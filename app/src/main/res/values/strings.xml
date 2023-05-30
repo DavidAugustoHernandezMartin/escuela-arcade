@@ -18,5 +18,6 @@
     <string name="descripcion_curso">Breve descripción del curso</string>
     <string name="numero_de_lecciones">Lecciones: %1$d</string>
     <string name="nombre_del_curso">Nombre del curso</string>
+    <string name="leccion">Leccion %1$d</string>
 
 </resources>

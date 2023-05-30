@@ -37,9 +37,11 @@ class HomeFragment:Fragment() {
         binding.apply {
             dataModel = viewModel
         }
-        appViewModel.user.observe(viewLifecycleOwner){
-            binding.apply {
-                recyclerviewHome.adapter = HomeListAdapter(requireContext(),appViewModel.user.value)
+        appViewModel.user.observe(viewLifecycleOwner){ user ->
+            user?.let {
+                binding.apply {
+                    recyclerviewHome.adapter = HomeListAdapter(requireContext(), it)
+                }
             }
         }
         appViewModel.loginStatus.observe(viewLifecycleOwner) { loginResource ->

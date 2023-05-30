@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/course_game_nav_graph"
+    app:startDestination="@id/courseListFragment">
+
+    <fragment
+        android:id="@+id/courseListFragment"
+        android:name="augusto.hernandez.escuelaarcade.coursegame.course.CourseListFragment"
+        android:label="Lecciones" >
+        <action
+            android:id="@+id/action_courseListFragment_to_courseFragment"
+            app:destination="@id/courseFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/courseFragment"
+        android:name="augusto.hernandez.escuelaarcade.coursegame.course.CourseFragment"
+        android:label="Curso" >
+        <action
+            android:id="@+id/action_courseFragment_to_gameFragment"
+            app:destination="@id/gameFragment"
+            app:popUpTo="@id/courseListFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="augusto.hernandez.escuelaarcade.coursegame.game.GameFragment"
+        android:label="Juego"
+        >
+        <action
+            android:id="@+id/action_gameFragment_to_courseListFragment"
+            app:destination="@id/courseListFragment"
+            app:popUpTo="@id/courseListFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+</navigation>

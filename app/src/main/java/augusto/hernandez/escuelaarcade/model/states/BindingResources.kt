@@ -19,6 +19,7 @@ fun bindImage(imgView: ImageView, imgUrl: Any?){
         is String -> {
             val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
             imgView.load(imgUri){
+                placeholder(R.drawable.loading_animation)
                 error(R.drawable.ic_broken_image)
             }
         }
@@ -26,7 +27,7 @@ fun bindImage(imgView: ImageView, imgUrl: Any?){
             imgView.setImageResource(imgUrl)
         }
         else -> {
-            imgView.setImageResource(R.drawable.ic_connection_error)
+            imgView.setImageResource(R.drawable.ic_broken_image)
         }
     }
 }
