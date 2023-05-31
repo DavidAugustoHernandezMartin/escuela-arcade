@@ -28,6 +28,9 @@ class CourseGameActivity:AppCompatActivity() {
         viewModel.curso.value = curso
         viewModel.userID = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
+
+
+
         /*En esta parte se obtiene una instancia de NavHostFragment que será inicializada
        a partir del fragmentContainer de esta actividad. La idea es que se pueda tener acceso
        a su navController*/
