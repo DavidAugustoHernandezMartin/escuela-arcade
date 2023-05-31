@@ -26,6 +26,9 @@ class CourseGameActivity:AppCompatActivity() {
         viewModel = ViewModelProvider(this)[CourseGameViewModel::class.java]
         viewModel.curso.value = curso
 
+
+
+
         /*En esta parte se obtiene una instancia de NavHostFragment que será inicializada
        a partir del fragmentContainer de esta actividad. La idea es que se pueda tener acceso
        a su navController*/

@@ -2,7 +2,6 @@ package augusto.hernandez.escuelaarcade.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-
 data class Contenido(val id:String?,val lecciones:Array<Leccion>?){
     constructor():this(null,null)
     override fun equals(other: Any?): Boolean {
@@ -30,7 +29,10 @@ data class Contenido(val id:String?,val lecciones:Array<Leccion>?){
 data class Leccion (val  nombre:String="",
                     val texto:Array<String> = arrayOf(),
                     val imagenes:Array<String> = arrayOf(),
-                    val juego:HashMap<String,Array<String>?>):Parcelable {
+                    val juego:HashMap<String,Array<String>> = hashMapOf("preguntas" to arrayOf(),
+                                                                         "respuestas" to arrayOf()
+                    )
+):Parcelable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -53,7 +55,4 @@ data class Leccion (val  nombre:String="",
         return result
     }
 
-    override fun toString(): String {
-        return "Leccion(nombre='$nombre', texto=${texto.contentToString()}, imagenes=${imagenes.contentToString()}, juego=$juego)"
-    }
 }
