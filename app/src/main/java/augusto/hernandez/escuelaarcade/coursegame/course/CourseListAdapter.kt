@@ -12,7 +12,7 @@ import augusto.hernandez.escuelaarcade.R
 import augusto.hernandez.escuelaarcade.model.Contenido
 import com.google.android.material.card.MaterialCardView
 
-class CourseListAdapter (private val context:Context,private val contenido:Contenido):RecyclerView.Adapter<CourseListAdapter.CourseListViewHolder>() {
+class CourseListAdapter (private val context:Context,private val contenido:Contenido?):RecyclerView.Adapter<CourseListAdapter.CourseListViewHolder>() {
     class CourseListViewHolder(val view: View):RecyclerView.ViewHolder(view){
         val card: MaterialCardView = view.findViewById(R.id.lessonCard)
         val name: TextView = view.findViewById(R.id.lessonName)
@@ -26,14 +26,15 @@ class CourseListAdapter (private val context:Context,private val contenido:Conte
     }
 
     override fun getItemCount(): Int {
-        return contenido.lecciones!!.size
+        return contenido?.lecciones?.size ?: 0
     }
 
     override fun onBindViewHolder(holder: CourseListViewHolder, position: Int) {
-        holder.name.text = contenido.lecciones?.get(position)?.nombre
-        holder.number.text = context.getString(R.string.numero_de_lecciones,contenido.lecciones!!.size)
+        val leccion = contenido?.lecciones?.get(position)
+        holder.name.text = leccion?.nombre
+        holder.number.text = context.getString(R.string.numero_de_lecciones,contenido?.lecciones?.size)
         holder.card.setOnClickListener{
-            val action:NavDirections = CourseListFragmentDirections.actionCourseListFragmentToCourseFragment()
+            val action:NavDirections = CourseListFragmentDirections.actionCourseListFragmentToCourseFragment(leccion)
             it.findNavController().navigate(action)
         }
     }

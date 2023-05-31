@@ -22,7 +22,7 @@ class CourseListFragment: Fragment() {
         binding.lifecycleOwner = this
         return fragmentBinding.root
     }
-
+    //TODO terminar la gestión del valor nulo para el adaptador y terminar de ensamblar el resto de elementos
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {

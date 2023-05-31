@@ -17,10 +17,20 @@ import coil.load
 fun bindImage(imgView: ImageView, imgUrl: Any?){
     when (imgUrl) {
         is String -> {
-            val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
-            imgView.load(imgUri){
-                placeholder(R.drawable.loading_animation)
-                error(R.drawable.ic_broken_image)
+            when(imgUrl) {
+                "foto_de_perfil" -> {
+                    imgView.setImageResource(R.drawable.profile)
+                }
+                "foto_de_fondo" -> {
+                    imgView.setImageResource(R.drawable.background)
+                }
+                else -> {
+                    val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
+                    imgView.load(imgUri) {
+                        placeholder(R.drawable.loading_animation)
+                        error(R.drawable.ic_broken_image)
+                    }
+                }
             }
         }
         is Int -> {
