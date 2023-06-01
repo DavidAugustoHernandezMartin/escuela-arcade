@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import augusto.hernandez.escuelaarcade.coursegame.CourseGameViewModel
 import augusto.hernandez.escuelaarcade.databinding.CourseListFragmentBinding
+import augusto.hernandez.escuelaarcade.model.states.PlaceholderAdapter
 
 class CourseListFragment: Fragment() {
     private lateinit var binding: CourseListFragmentBinding
-    private lateinit var viewModel: CourseGameViewModel
+    private val viewModel: CourseGameViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,11 +24,21 @@ class CourseListFragment: Fragment() {
         binding.lifecycleOwner = this
         return fragmentBinding.root
     }
-    //TODO terminar la gestión del valor nulo para el adaptador y terminar de ensamblar el resto de elementos
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             dataModel = viewModel
+        }
+        viewModel.contenido.observe(viewLifecycleOwner){ user ->
+            user?.let {
+                binding.apply {
+                    recyclerviewListLessons.adapter = CourseListAdapter(requireContext(), it)
+                }
+            }?: run {
+                binding.apply {
+                    recyclerviewListLessons.adapter = PlaceholderAdapter()
+                }
+            }
         }
     }
 }

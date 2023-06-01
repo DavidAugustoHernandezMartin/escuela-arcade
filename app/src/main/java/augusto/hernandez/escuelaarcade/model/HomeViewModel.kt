@@ -13,7 +13,7 @@ class HomeViewModel:ViewModel() {
 
             val course = when {
                 user.registros.isNullOrEmpty() || !user.registros.any{x -> x.id == courseId}-> {
-                    Curso(courseId,courseName, arrayOf(0,0),0L,"")
+                    Curso(courseId,courseName, listOf(0,0),0L,"")
                 }
                 else -> {
                     user.registros.first{ c -> c.id == courseId}

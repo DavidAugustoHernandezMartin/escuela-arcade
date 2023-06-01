@@ -32,37 +32,13 @@ data class Perfil(
 data class Curso(
     val id: String = "",
     var nombre: String = "",
-    val progreso:Array<Int> = arrayOf(
+    val progreso:List<Int> = listOf(
         0,0
     ),
     var maxima_puntuacion: Long = 0,
     var ultima_leccion:String = ""
 ) : Parcelable {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as Curso
-
-        if (id != other.id) return false
-        if (nombre != other.nombre) return false
-        if (!progreso.contentEquals(other.progreso)) return false
-        if (maxima_puntuacion != other.maxima_puntuacion) return false
-        if (ultima_leccion != other.ultima_leccion) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = id.hashCode()
-        result = 31 * result + nombre.hashCode()
-        result = 31 * result + progreso.contentHashCode()
-        result = 31 * result + maxima_puntuacion.hashCode()
-        result = 31 * result + ultima_leccion.hashCode()
-        return result
-    }
-
     override fun toString(): String {
-        return "Curso(id='$id', nombre='$nombre', progreso=${progreso.contentToString()}, maxima_puntuacion=$maxima_puntuacion, ultima_leccion='$ultima_leccion')"
+        return "Curso(id='$id', nombre='$nombre', progreso=$progreso, maxima_puntuacion=$maxima_puntuacion, ultima_leccion='$ultima_leccion')"
     }
 }

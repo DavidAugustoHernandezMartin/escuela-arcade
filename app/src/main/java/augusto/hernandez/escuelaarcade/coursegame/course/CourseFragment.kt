@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import augusto.hernandez.escuelaarcade.coursegame.CourseGameViewModel
 import augusto.hernandez.escuelaarcade.databinding.CourseFragmentBinding
 import augusto.hernandez.escuelaarcade.model.Leccion
 
 class CourseFragment:Fragment() {
     private lateinit var binding:CourseFragmentBinding
-    private lateinit var viewModel: CourseGameViewModel
+    private val viewModel: CourseGameViewModel by activityViewModels()
     private var leccion: Leccion? = null
 
     companion object{
@@ -38,5 +39,9 @@ class CourseFragment:Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.setLeccion(leccion!!)
+        binding.apply {
+            dataModel = viewModel
+        }
     }
 }

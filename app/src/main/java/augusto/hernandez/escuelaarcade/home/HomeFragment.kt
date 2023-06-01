@@ -10,6 +10,7 @@ import augusto.hernandez.escuelaarcade.R
 import augusto.hernandez.escuelaarcade.databinding.HomeFragmentBinding
 import augusto.hernandez.escuelaarcade.model.AppViewModel
 import augusto.hernandez.escuelaarcade.model.HomeViewModel
+import augusto.hernandez.escuelaarcade.model.states.PlaceholderAdapter
 import augusto.hernandez.escuelaarcade.model.states.Resource
 import com.google.android.material.snackbar.Snackbar
 
@@ -42,27 +43,9 @@ class HomeFragment:Fragment() {
                 binding.apply {
                     recyclerviewHome.adapter = HomeListAdapter(requireContext(), it)
                 }
-            }
-        }
-        appViewModel.loginStatus.observe(viewLifecycleOwner) { loginResource ->
-            when (loginResource) {
-                is Resource.Loading -> {
-                    binding.apply {
-                        loadingHome.visibility = View.VISIBLE
-                    }
-                }
-                is Resource.Success -> {
-                    binding.apply {
-                        loadingHome.visibility = View.GONE
-                        homeLogo.visibility = View.VISIBLE
-                        recyclerviewHome.visibility = View.VISIBLE
-                    }
-                }
-                is Resource.Error -> {
-                    binding.apply {
-                        loadingHome.setImageResource(R.drawable.ic_connection_error)
-                    }
-                    Snackbar.make(binding.root,R.string.no_connection,Snackbar.LENGTH_LONG).show()
+            }?: run {
+                binding.apply {
+                    recyclerviewHome.adapter = PlaceholderAdapter()
                 }
             }
         }
