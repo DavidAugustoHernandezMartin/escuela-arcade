@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+        <data>
+                <variable
+                    name="imageUrl"
+                    type="String" />
+        </data>
+<com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxHeight="@dimen/image_max_height"
+        android:maxWidth="@dimen/image_max_height"
+        app:cardCornerRadius="16dp"
+        app:cardPreventCornerOverlap="false">
+
+        <ImageView
+            android:id="@+id/fetchedImage"
+            app:imageUrl="@{imageUrl}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxHeight="@dimen/image_max_height"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            tools:src="@tools:sample/backgrounds/scenic"
+            android:contentDescription="@null" />
+
+</com.google.android.material.card.MaterialCardView>
+</layout>

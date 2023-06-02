@@ -6,17 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import augusto.hernandez.escuelaarcade.R
+import androidx.fragment.app.viewModels
 import augusto.hernandez.escuelaarcade.databinding.HomeFragmentBinding
 import augusto.hernandez.escuelaarcade.model.AppViewModel
 import augusto.hernandez.escuelaarcade.model.HomeViewModel
 import augusto.hernandez.escuelaarcade.model.states.PlaceholderAdapter
-import augusto.hernandez.escuelaarcade.model.states.Resource
-import com.google.android.material.snackbar.Snackbar
 
 class HomeFragment:Fragment() {
     //Se inicia el viewmodel compartido
-    private val viewModel: HomeViewModel by activityViewModels()
+    private val viewModel: HomeViewModel by viewModels()
     private val appViewModel:AppViewModel by activityViewModels()
     // Binding object instance corresponding to the fragment_u8.xml layout
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,

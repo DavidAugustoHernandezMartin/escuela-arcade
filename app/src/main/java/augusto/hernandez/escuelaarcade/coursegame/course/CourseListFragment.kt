@@ -14,6 +14,11 @@ class CourseListFragment: Fragment() {
     private lateinit var binding: CourseListFragmentBinding
     private val viewModel: CourseGameViewModel by activityViewModels()
 
+    companion object{
+        const val LECCION = "LECCION"
+        const val NUMERO = "NUMERO"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

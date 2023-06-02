@@ -5,21 +5,97 @@
         <variable
             name="dataModel"
             type="augusto.hernandez.escuelaarcade.coursegame.CourseGameViewModel" />
+        <variable
+            name="imageUrl"
+            type="java.util.List&lt;String>" />
+        <variable
+            name="app"
+            type="augusto.hernandez.escuelaarcade.coursegame.course.CourseFragment" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        >
-        <TextView
-            android:id="@+id/leccionObtenida"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_width="wrap_content"
-            android:text="@{dataModel.leccionActual.toString()}"
-            android:layout_height="wrap_content"/>
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:maxWidth= "700dp"
+            android:padding="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?attr/actionBarSize">
+            <TextView
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/lessonTitle"
+                android:text="@{dataModel.leccionActual.nombre}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:id="@+id/lessonContainer"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/lessonTitle"
+                app:layout_constraintBottom_toTopOf="@id/lessonFrame"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/lessonText1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="30dp"
+                    android:text="@{dataModel.leccionActual.texto.get(0)}"
+                    />
+                <include android:id="@+id/lessonImage1"
+                    layout="@layout/lesson_image_layout"
+                    app:imageUrl="@{imageUrl[0]}"/>
+                <TextView
+                    android:id="@+id/lessonText2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="30dp"
+                    android:text="@{dataModel.leccionActual.texto.get(1)}"
+                    />
+                <include android:id="@+id/lessonImage2"
+                    layout="@layout/lesson_image_layout"
+                    app:imageUrl="@{imageUrl[1]}"/>
+                <TextView
+                    android:id="@+id/lessonText3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="30dp"
+                    android:text="@{dataModel.leccionActual.texto.get(2)}"
+                    />
+                <include android:id="@+id/lessonImage3"
+                    layout="@layout/lesson_image_layout"
+                    app:imageUrl="@{imageUrl[2]}"/>
+                <TextView
+                    android:id="@+id/lessonText4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="30dp"
+                    android:text="@{dataModel.leccionActual.texto.get(3)}"
+                    />
+            </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <FrameLayout
+                android:id="@+id/lessonFrame"
+                app:layout_constraintTop_toBottomOf="@id/lessonContainer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginBottom="40dp"
+                android:padding="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/jugar"
+                    android:onClick="@{()->app.goToGame()}"/>
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </layout>

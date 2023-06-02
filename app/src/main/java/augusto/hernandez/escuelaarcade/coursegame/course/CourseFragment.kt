@@ -6,7 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import augusto.hernandez.escuelaarcade.coursegame.CourseGameViewModel
+import augusto.hernandez.escuelaarcade.coursegame.course.CourseListFragment.Companion.LECCION
+import augusto.hernandez.escuelaarcade.coursegame.course.CourseListFragment.Companion.NUMERO
 import augusto.hernandez.escuelaarcade.databinding.CourseFragmentBinding
 import augusto.hernandez.escuelaarcade.model.Leccion
 
@@ -14,10 +18,8 @@ class CourseFragment:Fragment() {
     private lateinit var binding:CourseFragmentBinding
     private val viewModel: CourseGameViewModel by activityViewModels()
     private var leccion: Leccion? = null
+    private var numero:Int = 0
 
-    companion object{
-        const val LECCION = "LECCION"
-    }
 
     /*Es importante resaltar que aquí solo se definirá la creación
     * del objeto fragment, no su renderización*/
@@ -25,6 +27,7 @@ class CourseFragment:Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             leccion = it.getParcelable(LECCION)
+            numero = it.getInt(NUMERO)
         }
     }
     override fun onCreateView(
@@ -42,6 +45,13 @@ class CourseFragment:Fragment() {
         viewModel.setLeccion(leccion!!)
         binding.apply {
             dataModel = viewModel
+            imageUrl = viewModel.leccionActual.value?.imagenes
+            app = this@CourseFragment
         }
+    }
+
+    fun goToGame(){
+        val action: NavDirections = CourseFragmentDirections.actionCourseFragmentToGameFragment(numero)
+        this.findNavController().navigate(action)
     }
 }

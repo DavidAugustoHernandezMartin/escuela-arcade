@@ -12,7 +12,6 @@ import coil.load
 * provisto en el atributo personalizado para reducir código de implementación en
 * otras clases o componentes del programa.*/
 
-
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: Any?){
     when (imgUrl) {

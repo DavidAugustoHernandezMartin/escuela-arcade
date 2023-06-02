@@ -32,9 +32,9 @@ class CourseListAdapter (private val context:Context,private val contenido:Conte
     override fun onBindViewHolder(holder: CourseListViewHolder, position: Int) {
         val leccion = contenido.lecciones!![position]
         holder.name.text = leccion.nombre
-        holder.number.text = context.getString(R.string.numero_de_lecciones,contenido.lecciones.size)
+        holder.number.text = context.getString(R.string.numero_de_lecciones,position+1)
         holder.card.setOnClickListener{
-            val action:NavDirections = CourseListFragmentDirections.actionCourseListFragmentToCourseFragment(leccion)
+            val action:NavDirections = CourseListFragmentDirections.actionCourseListFragmentToCourseFragment(leccion,position)
             it.findNavController().navigate(action)
         }
     }
