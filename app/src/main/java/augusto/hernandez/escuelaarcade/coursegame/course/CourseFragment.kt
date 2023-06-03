@@ -1,6 +1,7 @@
 package augusto.hernandez.escuelaarcade.coursegame.course
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,6 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import augusto.hernandez.escuelaarcade.coursegame.CourseGameViewModel
 import augusto.hernandez.escuelaarcade.coursegame.course.CourseListFragment.Companion.LECCION
-import augusto.hernandez.escuelaarcade.coursegame.course.CourseListFragment.Companion.NUMERO
 import augusto.hernandez.escuelaarcade.databinding.CourseFragmentBinding
 import augusto.hernandez.escuelaarcade.model.Leccion
 
@@ -20,6 +20,9 @@ class CourseFragment:Fragment() {
     private var leccion: Leccion? = null
     private var numero:Int = 0
 
+    companion object{
+        const val NUMERO = "NUMERO"
+    }
 
     /*Es importante resaltar que aquí solo se definirá la creación
     * del objeto fragment, no su renderización*/
@@ -27,7 +30,7 @@ class CourseFragment:Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             leccion = it.getParcelable(LECCION)
-            numero = it.getInt(NUMERO)
+            numero = it.getInt(CourseListFragment.NUMERO)
         }
     }
     override fun onCreateView(
@@ -37,7 +40,7 @@ class CourseFragment:Fragment() {
     ): View{
         val fragmentBinding = CourseFragmentBinding.inflate(inflater, container, false)
         binding = fragmentBinding
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         return fragmentBinding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,6 +55,7 @@ class CourseFragment:Fragment() {
 
     fun goToGame(){
         val action: NavDirections = CourseFragmentDirections.actionCourseFragmentToGameFragment(numero)
-        this.findNavController().navigate(action)
+        Log.d("ARGUMENTOS","Se está enviando el argumento $numero a GameFragment")
+        findNavController().navigate(action)
     }
 }

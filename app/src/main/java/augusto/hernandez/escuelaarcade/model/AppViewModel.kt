@@ -41,9 +41,6 @@ class AppViewModel : ViewModel() {
     private val database:FirebaseFirestore = Firebase.firestore
     private val auth:FirebaseUser= FirebaseAuth.getInstance().currentUser!!
 
-
-
-
     fun fetchCategories() {
         // Este es solo un ejemplo, debes implementar tu propia lógica de red aquí
         val fetchedCategories = _user.value?.registros

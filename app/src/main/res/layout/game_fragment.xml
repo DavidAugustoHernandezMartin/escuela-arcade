@@ -16,12 +16,16 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/game_fragment"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
             name="gameViewModel"
             type="augusto.hernandez.escuelaarcade.coursegame.game.GameViewModel" />
+        <variable
+            name="appBinding"
+            type="augusto.hernandez.escuelaarcade.coursegame.game.GameFragment" />
         <variable
             name="maxNoOfWords"
             type="int" />
@@ -44,6 +48,7 @@
                 android:layout_marginStart="@dimen/default_padding"
                 android:layout_marginEnd="@dimen/default_padding"
                 android:text="@string/skip"
+                android:onClick="@{()->appBinding.onSkipWord()}"
                 app:layout_constraintBaseline_toBaselineOf="@id/submit"
                 app:layout_constraintEnd_toStartOf="@id/submit"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -56,6 +61,7 @@
                 android:text="@string/submit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/skip"
+                android:onClick="@{()->appBinding.onSubmitWord()}"
                 app:layout_constraintTop_toBottomOf="@id/textField" />
 
             <TextView
@@ -67,7 +73,7 @@
                 app:layout_constraintBottom_toTopOf="@id/textField"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_unscrambled_word" />
+                app:layout_constraintTop_toBottomOf="@id/textView_unscrambled_word" />
 
             <TextView
                 android:id="@+id/textView_unscrambled_word"
@@ -76,7 +82,6 @@
                 android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginBottom="@dimen/default_margin"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                android:text="@{gameViewModel.currentScrambledWord}"
                 app:layout_constraintBottom_toTopOf="@id/textView_instructions"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +92,6 @@
                 android:id="@+id/word_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{gameViewModel.currentWordCount}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintBottom_toTopOf="@id/textView_unscrambled_word"
                 app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +102,6 @@
                 android:id="@+id/score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{gameViewModel.score}"
                 android:textAllCaps="true"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -14,7 +14,7 @@ import augusto.hernandez.escuelaarcade.model.states.PlaceholderAdapter
 
 class HomeFragment:Fragment() {
     //Se inicia el viewmodel compartido
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
     private val appViewModel:AppViewModel by activityViewModels()
     // Binding object instance corresponding to the fragment_u8.xml layout
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,

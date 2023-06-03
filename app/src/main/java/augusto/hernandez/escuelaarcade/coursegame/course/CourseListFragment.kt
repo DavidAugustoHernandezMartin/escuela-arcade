@@ -26,7 +26,7 @@ class CourseListFragment: Fragment() {
     ): View {
         val fragmentBinding = CourseListFragmentBinding.inflate(inflater, container, false)
         binding = fragmentBinding
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         return fragmentBinding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

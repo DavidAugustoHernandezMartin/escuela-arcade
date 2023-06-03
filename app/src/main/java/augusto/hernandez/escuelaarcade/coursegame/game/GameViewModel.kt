@@ -9,13 +9,23 @@ class GameViewModel:ViewModel(){
 
     private val _score: MutableLiveData<Int> = MutableLiveData(0)
     private val _currentWordCount:MutableLiveData<Int> = MutableLiveData(0)
-    private val _currentScrambledWord:MutableLiveData<String> = MutableLiveData()
-    private var wordslist:MutableList<String> = mutableListOf(addWord(getWord()))
-    private lateinit var currentWord:String
+    private val _currentScrambledWord:MutableLiveData<String> = MutableLiveData("")
+    private var wordslist:MutableList<String>
+    private var currentWord: String
+
 
     val score: LiveData<Int> get() = _score
     val currentWordCount: LiveData<Int> get() = _currentWordCount
     val currentScrambledWord: LiveData<String> get() = _currentScrambledWord
+
+    init {
+        _score.value =0
+        _currentWordCount.value = 0
+        _currentScrambledWord.value = addWord(getWord())
+        wordslist = mutableListOf()
+        currentWord = getWord().toString()
+    }
+
 
     /*override fun onCleared() {
         super.onCleared()
@@ -45,7 +55,7 @@ class GameViewModel:ViewModel(){
     }
 
     private fun increaseScore(){
-        _score.value= _score.value!!.plus(SCORE_INCREASE)
+        _score.value= _score.value?.plus(SCORE_INCREASE)
     }
 
     fun isUserWordCorrect(playerWord:String):Boolean{

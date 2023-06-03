@@ -22,16 +22,4 @@
     <string name="jugar">JUGAR</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae velit vel risus suscipit efficitur non sit amet leo. Mauris commodo ipsum vel dui efficitur, id egestas orci posuere. Vestibulum non ante semper risus scelerisque laoreet. Etiam nec metus et libero porttitor blandit at nec nibh. Mauris et accumsan turpis. Pellentesque porttitor ante vulputate, luctus est at, euismod nisi. Etiam et dui hendrerit, pulvinar tortor at, rutrum nisi. Morbi eu sodales turpis, ut ornare ante. Sed placerat felis vitae lorem dapibus, vitae fringilla quam scelerisque. Vivamus maximus sem vestibulum felis mollis, viverra accumsan nisl molestie. Sed id placerat orci, quis finibus tortor. Donec non diam a felis molestie vulputate at tristique orci. Suspendisse at mi at dui mattis rhoncus. Maecenas a orci varius, mollis neque in, tincidunt ligula. Curabitur ante quam, suscipit quis dui quis, dapibus eleifend odio. Praesent luctus dolor sit amet nisl ultricies, non gravida leo suscipit.</string>
 
-    <!-- Strings del juego -->
-    <string name="instructions">Unscramble the word using all the letters.</string>
-    <string name="skip">Skip</string>
-    <string name="submit">Submit</string>
-    <string name="score">Score: %1$d</string>
-    <string name="word_count">%1$d of %2%d words</string>
-    <string name="enter_your_word">Enter your word</string>
-    <string name="try_again">Try again!</string>
-    <string name="congratulations">Congratulations!</string>
-    <string name="you_scored">You scored:%1$d points!</string>
-    <string name="exit">Exit game</string>
-    <string name="play_again">Play again</string>
 </resources>
