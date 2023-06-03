@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import augusto.hernandez.escuelaarcade.model.Contenido
 import augusto.hernandez.escuelaarcade.model.Curso
 import augusto.hernandez.escuelaarcade.model.Leccion
+import augusto.hernandez.escuelaarcade.model.Usuario
+import augusto.hernandez.escuelaarcade.model.data.Results
 import augusto.hernandez.escuelaarcade.model.states.Resource
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -76,6 +78,45 @@ class CourseGameViewModel: ViewModel() {
                } catch (e: Exception) {
                     _fetchStatus.value = Resource.Error("Error de obtención de datos de curso")
                     Log.e(COURSEDATA, "Ocurrió un error de solicitud de contenidos de curso: ${e.message}")
+               }
+          }
+     }
+
+     fun update(curso: Curso){
+          viewModelScope.launch{
+               // obtén una referencia al documento del usuario
+               val docRef = database.collection("usuarios").document(userID)
+
+               // obtén el documento
+               docRef.get().addOnSuccessListener { document ->
+                    if (document != null) {
+                         Log.d(COURSEDATA, "Se obtuvo el siguiente documento para actualizar el curso ${curso.nombre} en el usuario $userID: ${document.data}")
+
+                         // obtén la lista de cursos
+                         val registros = document.toObject<Usuario>()?.registros
+
+                         // encuentra el índice del curso que quieres actualizar
+                         val cursoIndex = registros?.indexOfFirst { it.id == curso.id }
+
+                         if (cursoIndex != null && cursoIndex != -1) {
+                              // prepara los nuevos datos
+                              val nuevoNombre = "Nuevo nombre del curso"
+                              val nuevaMaximaPuntuacion = 1234L  // reemplázalo con la puntuación correcta
+
+                              // actualiza los datos
+                              docRef.update(
+                                   "registros.$cursoIndex.nombre", nuevoNombre,
+                                   "registros.$cursoIndex.maxima_puntuacion", nuevaMaximaPuntuacion
+                              )
+                                   .addOnSuccessListener { Log.d(COURSEDATA, "Documento actualizado correctamente") }
+                                   .addOnFailureListener { e -> Log.w(COURSEDATA, "Error al actualizar el documento", e) }
+                         }
+
+                    } else {
+                         Log.d(COURSEDATA, "No se pudo encontrar el documento del usuario $userID para actualizar el curso")
+                    }
+               }.addOnFailureListener { exception ->
+                    Log.e(COURSEDATA, "Ocurrió una excepción al querer actualizar los datos de curso del usuario $userID : ", exception)
                }
           }
      }

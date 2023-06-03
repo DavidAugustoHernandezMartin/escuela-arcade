@@ -20,12 +20,17 @@ class GameFragment: Fragment() {
     private val courseViewModel:CourseGameViewModel by activityViewModels()
     // Binding object instance with access to the views in the game_fragment.xml layout
     private lateinit var binding: GameFragmentBinding
+    private var numero:Int = 0
+    private val medium = (SCORE_INCREASE * MAX_NO_OF_WORDS)/2
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        arguments?.let {
+            numero = it.getInt(CourseFragment.NUMERO)
+        }
         binding = GameFragmentBinding.inflate(inflater,container,false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -53,6 +58,7 @@ class GameFragment: Fragment() {
             binding.textViewInstructions.text = instructions.toString()
         }
         viewModel.setGame(courseViewModel.leccionActual.value!!.juego)
+
     }
 
      fun onSubmitWord() {
@@ -79,6 +85,7 @@ class GameFragment: Fragment() {
     }
 
     private fun exitGame() {
+        //llamar a una función de actualización
         findNavController().navigate(R.id.action_gameFragment_to_courseListFragment)
     }
 
@@ -92,17 +99,31 @@ class GameFragment: Fragment() {
         }
     }
 
-    private fun showFinalScoreDialog(){
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.congratulations))
-            .setMessage(getString(R.string.you_scored,viewModel.score.value ?: 0))
-            .setCancelable(false)
-            .setNegativeButton(getString(R.string.exit)){
-                    _,_ -> exitGame()
-            }
-            .setPositiveButton(getString(R.string.play_again)){
-                    _,_ -> restartGame()
-            }
-            .show()
+
+
+    private fun showFinalScoreDialog() {
+
+        if (viewModel.score.value!! < medium) {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(getString(R.string.congratulations))
+                .setMessage(getString(R.string.you_scored, viewModel.score.value ?: 0,medium))
+                .setPositiveButton(getString(R.string.exit)) { _, _ ->
+                    run {
+                        exitGame()
+                    }
+                }
+                .show()
+        } else{
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(getString(R.string.better_next_time))
+                .setMessage(getString(R.string.you_scored, viewModel.score.value ?: 0,medium))
+                .setPositiveButton(getString(R.string.exit)) { _, _ ->
+                    run {
+                        exitGame()
+                    }
+                }
+                .show()
+        }
+
     }
 }

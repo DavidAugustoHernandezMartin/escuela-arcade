@@ -16,9 +16,10 @@ class GameViewModel:ViewModel(){
     private var wordslist:MutableList<String> = mutableListOf()
     private var currentWord: String = ""
 
-    private var game:MutableLiveData<HashMap<String,List<String>>> = MutableLiveData()
+    private val _game:MutableLiveData<HashMap<String,List<String>>> = MutableLiveData()
+    val game:LiveData<HashMap<String,List<String>>> get() = _game
     fun setGame(map: HashMap<String,List<String>>){
-        game.value = map
+        _game.value = map
         getNextWord()
     }
 
@@ -37,8 +38,8 @@ class GameViewModel:ViewModel(){
     }
 
     private fun getWord():CharArray{
-        currentWord = game.value?.get(RESPUESTAS)?.get(currentWordCount.value!!) ?: ""
-        _currentHint.value = game.value?.get(PREGUNTAS)?.get(currentWordCount.value!!) ?: ""
+        currentWord = _game.value?.get(RESPUESTAS)?.get(currentWordCount.value!!) ?: ""
+        _currentHint.value = _game.value?.get(PREGUNTAS)?.get(currentWordCount.value!!) ?: ""
         return currentWord.toCharArray()
     }
 

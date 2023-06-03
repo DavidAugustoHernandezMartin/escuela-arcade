@@ -41,7 +41,7 @@ class HomeListAdapter(private val context: Context,private val user:Usuario): Re
         holder.lessons.text = context.getString(R.string.numero_de_lecciones,item.numeroDeLecciones)
         holder.image.setImageResource(item.imagen)
         holder.card.setOnClickListener{
-            HomeViewModel.goToCourse(context,user,item.id,item.nombreDeCurso)
+            HomeViewModel.goToCourse(context,user,item.id,item.nombreDeCurso,item.numeroDeLecciones)
         }
     }
 
