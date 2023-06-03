@@ -16,7 +16,6 @@ class CourseListFragment: Fragment() {
 
     companion object{
         const val LECCION = "LECCION"
-        const val NUMERO = "NUMERO"
     }
 
     override fun onCreateView(

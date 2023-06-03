@@ -4,46 +4,41 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
+const val PREGUNTAS = "preguntas"
+const val RESPUESTAS = "respuestas"
 class GameViewModel:ViewModel(){
 
 
     private val _score: MutableLiveData<Int> = MutableLiveData(0)
     private val _currentWordCount:MutableLiveData<Int> = MutableLiveData(0)
     private val _currentScrambledWord:MutableLiveData<String> = MutableLiveData("")
-    private var wordslist:MutableList<String>
-    private var currentWord: String
+    private val _currentHint:MutableLiveData<String> = MutableLiveData("")
+    private var wordslist:MutableList<String> = mutableListOf()
+    private var currentWord: String = ""
 
+    private var game:MutableLiveData<HashMap<String,List<String>>> = MutableLiveData()
+    fun setGame(map: HashMap<String,List<String>>){
+        game.value = map
+        getNextWord()
+    }
 
     val score: LiveData<Int> get() = _score
     val currentWordCount: LiveData<Int> get() = _currentWordCount
     val currentScrambledWord: LiveData<String> get() = _currentScrambledWord
-
-    init {
-        _score.value =0
-        _currentWordCount.value = 0
-        _currentScrambledWord.value = addWord(getWord())
-        wordslist = mutableListOf()
-        currentWord = getWord().toString()
-    }
+    val currentHint:LiveData<String> get() = _currentHint
 
 
-    /*override fun onCleared() {
-        super.onCleared()
-        Log.d("GameFragment","GameView destroyed!")
-    }*/
+
 
     private fun getNextWord(){
         val tempWord = getWord()
         currentWord = String(tempWord)
-        if (wordslist.contains(currentWord)){
-            getNextWord()
-        }else{
-            wordslist.add(addWord(tempWord))
-        }
+        wordslist.add(addWord(tempWord))
     }
 
     private fun getWord():CharArray{
-        currentWord = allWordsList.random()
+        currentWord = game.value?.get(RESPUESTAS)?.get(currentWordCount.value!!) ?: ""
+        _currentHint.value = game.value?.get(PREGUNTAS)?.get(currentWordCount.value!!) ?: ""
         return currentWord.toCharArray()
     }
 

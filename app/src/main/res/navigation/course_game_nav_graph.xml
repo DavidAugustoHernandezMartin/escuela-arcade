@@ -32,10 +32,6 @@
             app:argType="augusto.hernandez.escuelaarcade.model.Leccion"
             app:nullable="true"
             android:defaultValue="@null" />
-        <argument
-            android:name="NUMERO"
-            app:argType="integer"
-            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
@@ -48,9 +44,5 @@
             app:destination="@id/courseListFragment"
             app:popUpTo="@id/courseListFragment"
             app:popUpToInclusive="true"/>
-        <argument
-            android:name="NUMERO"
-            app:argType="integer"
-            android:defaultValue="0" />
     </fragment>
 </navigation>

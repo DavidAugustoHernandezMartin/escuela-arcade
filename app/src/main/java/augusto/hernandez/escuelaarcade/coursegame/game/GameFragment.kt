@@ -9,37 +9,23 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import augusto.hernandez.escuelaarcade.R
+import augusto.hernandez.escuelaarcade.coursegame.CourseGameViewModel
 import augusto.hernandez.escuelaarcade.coursegame.course.CourseFragment
 import augusto.hernandez.escuelaarcade.databinding.GameFragmentBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-
+const val SCORE_INCREASE = 20
+const val MAX_NO_OF_WORDS = 3
 class GameFragment: Fragment() {
     private val viewModel:GameViewModel by activityViewModels()
-
+    private val courseViewModel:CourseGameViewModel by activityViewModels()
     // Binding object instance with access to the views in the game_fragment.xml layout
     private lateinit var binding: GameFragmentBinding
-
-    // Create a ViewModel the first time the fragment is created.
-    // If the fragment is re-created, it receives the same GameViewModel instance created by the
-    // first fragment
-
-    private var numero:Int=0
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            numero = it.getInt(CourseFragment.NUMERO)
-        }
-        Log.d("ARGUMENTOS","Se está recibiendo el argumento $numero a de CourseFragment")
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout XML file and return a binding object instance
-        //Esta vez con databinding en vez de viewbinding
         binding = GameFragmentBinding.inflate(inflater,container,false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -48,22 +34,25 @@ class GameFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Inicialización de variables de diseño (databinding)
+
         binding.apply {
             gameViewModel = viewModel
             maxNoOfWords = MAX_NO_OF_WORDS
             appBinding = this@GameFragment
         }
         binding.gameViewModel!!.currentScrambledWord.observe(viewLifecycleOwner){ newWord ->
-            binding.textViewUnscrambledWord.text = newWord ?: "palabra"
+            binding.textViewUnscrambledWord.text = newWord ?: "_"
         }
-
         binding.gameViewModel!!.currentWordCount.observe(viewLifecycleOwner){ newWordCount ->
             binding.wordCount.text = newWordCount.toString()
         }
-
         binding.gameViewModel!!.score.observe(viewLifecycleOwner){ newScore ->
             binding.score.text = newScore.toString()
         }
+        binding.gameViewModel!!.currentHint.observe(viewLifecycleOwner){ instructions ->
+            binding.textViewInstructions.text = instructions.toString()
+        }
+        viewModel.setGame(courseViewModel.leccionActual.value!!.juego)
     }
 
      fun onSubmitWord() {
