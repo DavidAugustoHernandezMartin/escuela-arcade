@@ -36,7 +36,7 @@
     <string name="imagen_de_fondo">Imágen de fondo</string>
 
     <!-- Strings de datos obtenidos -->
-    <string name="stat_tab_contents"><b>Progreso:</b> 1%$s\n\n<b>Ultima leccion:</b> 1%$s\n\n<b>Maxima puntuacion obtenida:</b> 1%$s</string>
-    <string name="profile_contents"><b>Cursos activos:</b> 1%$s\n\n<b>lecciones totales aprobadas:</b> 1%$s\n\n<b>Es autor:</b> 1%$s</string>
+    <string name="stat_tab_contents"><b>Progreso:</b> %1$s \n\n<b>Ultima leccion:</b> %2$s \n\n<b>Maxima puntuacion obtenida:</b> %3$s</string>
+    <string name="profile_contents"><b>Cursos activos:</b> %1$s \n\n<b>lecciones totales aprobadas:</b> %2$s \n\n<b>Es autor:</b> %3$s </string>
 
 </resources>

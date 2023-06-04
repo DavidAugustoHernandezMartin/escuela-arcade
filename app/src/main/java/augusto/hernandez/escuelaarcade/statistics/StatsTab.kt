@@ -26,8 +26,12 @@ class StatsTab: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.stats_tab_fragment, container, false)
-        val textView: TextView = view.findViewById(R.id.courseTextView)
-        textView.text = course?.toString() ?: "Datos no disponibles"
+        val textView: TextView = view.findViewById(R.id.cardData)
+        if(course != null) {
+            textView.text = getString(R.string.stat_tab_contents, "${course!!.progreso.sum()} de ${course!!.progreso.size} lecciones completadas",course!!.ultima_leccion,course!!.maxima_puntuacion.toString())
+        } else {
+            textView.text = getString(R.string.datos_no_disponibles)
+        }
         return view
     }
 

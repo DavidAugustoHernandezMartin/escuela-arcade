@@ -7,12 +7,17 @@
         <variable
             name="dataModel"
             type="augusto.hernandez.escuelaarcade.model.AppViewModel" />
+        <variable
+            name="profileInput"
+            type="String" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/mainStructure"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -21,12 +26,13 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/profileData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="250dp">
 
             <ImageView
-                android:id="@+id/background_image"
+                android:id="@+id/backgroundPicture"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:alpha="0.5"
@@ -35,6 +41,7 @@
                 android:src="@drawable/background"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +81,17 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <include
+            android:id="@+id/profileData"
+            layout="@layout/data_description_card_layout"
+            app:input="@{profileInput}"
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileFrameBackground"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:layout_editor_absoluteX="8dp" />
+
+    </LinearLayout>
     </ScrollView>
 </layout>
