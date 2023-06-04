@@ -62,7 +62,6 @@ class GameFragment: Fragment() {
         viewModel.setGame(courseViewModel.leccionActual.value!!.juego)
         viewModel.results.apply {
             lastLesson = courseViewModel.leccionActual.value!!.nombre
-            progress = courseViewModel.curso.value!!.progreso
             maxPoints = courseViewModel.curso.value!!.maxima_puntuacion
         }
     }
@@ -90,7 +89,7 @@ class GameFragment: Fragment() {
             val newData = courseViewModel.createModifiedCourse(viewModel.results.lastLesson,
                                                 viewModel.results.maxPoints,
                                                 numero,
-                                                viewModel.results.progress[numero])
+                                                courseViewModel.curso.value!!.progreso[numero])
 
             if (newData != null) {
                 courseViewModel.curso.value = newData
@@ -117,8 +116,20 @@ class GameFragment: Fragment() {
     private fun showFinalScoreDialog() {
 
         if (viewModel.score.value!! >= medium) {
-            //TODO implementar lógica de asignación de valor aprobado
             completado = courseViewModel.curso.value!!.progreso[numero] == 0
+            if(completado){
+                // Se obtiene la lista de progreso y se transforma a mutable
+                val progreso = courseViewModel.curso.value?.progreso?.toMutableList()
+
+                // incrementa el valor en el índice especificado
+                progreso?.let {
+                    it[numero] = 1
+
+                    // actualiza el valor de progreso en el objeto Curso
+                    val cursoActualizado = courseViewModel.curso.value?.copy(progreso = it)
+                    courseViewModel.curso.value = cursoActualizado
+                }
+            }
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(getString(R.string.congratulations))
                 .setMessage(getString(R.string.you_scored, viewModel.score.value ?: 0,medium))

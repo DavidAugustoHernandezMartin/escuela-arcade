@@ -16,7 +16,7 @@ class GameViewModel:ViewModel(){
     private val _currentHint:MutableLiveData<String> = MutableLiveData("")
     private var wordslist:MutableList<String> = mutableListOf()
     private var currentWord: String = ""
-    var results:Results = Results(listOf(),"",0L)
+    var results:Results = Results("",0L)
 
     private val _game:MutableLiveData<HashMap<String,List<String>>> = MutableLiveData()
     fun setGame(map: HashMap<String,List<String>>){
