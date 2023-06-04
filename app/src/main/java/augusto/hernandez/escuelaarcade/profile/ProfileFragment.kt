@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import augusto.hernandez.escuelaarcade.databinding.HomeFragmentBinding
 import augusto.hernandez.escuelaarcade.databinding.ProfileFragmentBinding
 import augusto.hernandez.escuelaarcade.model.AppViewModel
 

@@ -10,7 +10,7 @@ class HomeViewModel:ViewModel() {
 
     companion object {
         fun goToCourse(context: Context, user:Usuario, courseId:String,courseName:String,courseLength:Int) {
-
+            //TODO cambiar esto para crear un curso correctamente
             val course = when {
                 user.registros.isNullOrEmpty() || !user.registros.any{x -> x.id == courseId}-> {
                     Curso(courseId,courseName, listOf(0,courseLength),0L,"")

@@ -1,7 +1,6 @@
 package augusto.hernandez.escuelaarcade.coursegame.game
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,8 @@ import augusto.hernandez.escuelaarcade.coursegame.CourseGameViewModel
 import augusto.hernandez.escuelaarcade.coursegame.course.CourseFragment
 import augusto.hernandez.escuelaarcade.databinding.GameFragmentBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
+
 const val SCORE_INCREASE = 20
 const val MAX_NO_OF_WORDS = 3
 class GameFragment: Fragment() {
@@ -22,6 +23,7 @@ class GameFragment: Fragment() {
     private lateinit var binding: GameFragmentBinding
     private var numero:Int = 0
     private val medium = (SCORE_INCREASE * MAX_NO_OF_WORDS)/2
+    private var completado = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,7 +60,11 @@ class GameFragment: Fragment() {
             binding.textViewInstructions.text = instructions.toString()
         }
         viewModel.setGame(courseViewModel.leccionActual.value!!.juego)
-
+        viewModel.results.apply {
+            lastLesson = courseViewModel.leccionActual.value!!.nombre
+            progress = courseViewModel.curso.value!!.progreso
+            maxPoints = courseViewModel.curso.value!!.maxima_puntuacion
+        }
     }
 
      fun onSubmitWord() {
@@ -79,13 +85,22 @@ class GameFragment: Fragment() {
         }
     }
 
-    private fun restartGame() {
+    private fun exitGame(passed:Boolean) {
+        if(passed){
+            val newData = courseViewModel.createModifiedCourse(viewModel.results.lastLesson,
+                                                viewModel.results.maxPoints,
+                                                numero,
+                                                viewModel.results.progress[numero])
+
+            if (newData != null) {
+                courseViewModel.curso.value = newData
+                courseViewModel.update(newData)
+            }else{
+                Snackbar.make(binding.root,"No se han podido sincronizar datos de la lección actual:  ${courseViewModel.leccionActual}",Snackbar.LENGTH_LONG).show()
+            }
+        }
         viewModel.reinitializationData()
         setErrorTextField(false)
-    }
-
-    private fun exitGame() {
-        //llamar a una función de actualización
         findNavController().navigate(R.id.action_gameFragment_to_courseListFragment)
     }
 
@@ -99,17 +114,17 @@ class GameFragment: Fragment() {
         }
     }
 
-
-
     private fun showFinalScoreDialog() {
 
-        if (viewModel.score.value!! < medium) {
+        if (viewModel.score.value!! >= medium) {
+            //TODO implementar lógica de asignación de valor aprobado
+            completado = courseViewModel.curso.value!!.progreso[numero] == 0
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(getString(R.string.congratulations))
                 .setMessage(getString(R.string.you_scored, viewModel.score.value ?: 0,medium))
                 .setPositiveButton(getString(R.string.exit)) { _, _ ->
                     run {
-                        exitGame()
+                        exitGame(true)
                     }
                 }
                 .show()
@@ -119,7 +134,7 @@ class GameFragment: Fragment() {
                 .setMessage(getString(R.string.you_scored, viewModel.score.value ?: 0,medium))
                 .setPositiveButton(getString(R.string.exit)) { _, _ ->
                     run {
-                        exitGame()
+                        exitGame(false)
                     }
                 }
                 .show()

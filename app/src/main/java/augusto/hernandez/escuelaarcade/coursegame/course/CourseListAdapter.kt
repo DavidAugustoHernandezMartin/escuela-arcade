@@ -34,7 +34,7 @@ class CourseListAdapter (private val context:Context,private val contenido:Conte
         holder.name.text = leccion.nombre
         holder.number.text = context.getString(R.string.numero_de_lecciones,position+1)
         holder.card.setOnClickListener{
-            val action:NavDirections = CourseListFragmentDirections.actionCourseListFragmentToCourseFragment(leccion,position)
+            val action:NavDirections = CourseListFragmentDirections.actionCourseListFragmentToCourseFragment(position,leccion)
             it.findNavController().navigate(action)
         }
     }
