@@ -2,6 +2,11 @@ package augusto.hernandez.escuelaarcade.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+
+/*Este es un modelo de datos utilizado para obtener un contenido de un curso en la base de datos de
+* Firestore. Al igual que con la clase Usuario, ésta tiene una subclase Parcelable que permitirá
+* comunicar el estado del contenido especificado a otros componentes sin necesidad de lanzar
+* procesos de sincronización de datos.*/
 data class Contenido(val id:String?,val lecciones:List<Leccion>?){
     constructor():this(null,null)
 

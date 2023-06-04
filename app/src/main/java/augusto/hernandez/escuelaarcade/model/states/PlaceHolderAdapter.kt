@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import augusto.hernandez.escuelaarcade.R
 
+/*Este adaptador auxiliar permite gestionar el caso en que el valor de estado recibido
+* por un renderizador sea nulo.*/
 class PlaceholderAdapter: RecyclerView.Adapter<PlaceholderAdapter.ViewHolder>() {
 
     // Como es un placeholder, no tenemos ningún dato

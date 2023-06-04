@@ -22,7 +22,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import okhttp3.internal.wait
-
+/*Esta clase, como también CourseGameViewModel, mantendrá una implementación de un viewModel
+* para la actividad MainActivity. Tiene los datos fundamentales del usuario, que se utilizarán en
+* las solicitudes de contenidos remotos y en la interactividad con el resto de componentes de
+* la aplicación. Es por esto que su papel es fundamental para que se pueda utilizar la apliacación.*/
 const val LOGINDATA = "LOGINDATA"
 
 class AppViewModel : ViewModel() {
@@ -47,6 +50,10 @@ class AppViewModel : ViewModel() {
         _courses.value = fetchedCategories
     }
 
+    /*Debido a que esta aplicación solamente va a gestionar datos de segundo plano por medio del
+    * entorno de ViewModel, ciertas características tendrán que ser elaboradas con metodologías experimentales.
+    * En este caso, se necesitará de la Api Continuations de Kotlin Flow para poder mantener una sincronización
+    * de eventos entre los procesos de primer plano y los de segundo plano.*/
     @OptIn(ExperimentalCoroutinesApi::class)
     private suspend fun loginUser(): Usuario? {
         return withContext(Dispatchers.IO) {
@@ -114,7 +121,8 @@ class AppViewModel : ViewModel() {
         }
     }
 
-
+    /*Esta funcción permite la creación de un perfil de usuario inicial con valores por defecto en caso
+    * de que no hayan registros.*/
     private fun customUser(): Usuario {
         val id: String = auth.uid
         val name: String = if (auth.displayName != null) auth.displayName!! else "usuario"

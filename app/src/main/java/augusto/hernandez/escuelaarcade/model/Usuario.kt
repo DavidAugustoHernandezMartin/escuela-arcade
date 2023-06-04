@@ -3,6 +3,9 @@ package augusto.hernandez.escuelaarcade.model
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
+/*Esta clase de datos representa el documento que se estructurará y guardará en Firestore.
+* Tiene subclases que facilitan la organización de entidades correspondientes al esquema de
+* la aplicación.*/
 data class Usuario(
     val id:String?,
     val perfil:Perfil?,
@@ -28,6 +31,8 @@ data class Perfil(
     }
 }
 
+/*La utilización de calses Parcelable permitirá la comunicación de estados sin la necesidad
+* de sincronización remota.*/
 @Parcelize
 data class Curso(
     val id: String = "",

@@ -11,7 +11,8 @@ import augusto.hernandez.escuelaarcade.databinding.HomeFragmentBinding
 import augusto.hernandez.escuelaarcade.model.AppViewModel
 import augusto.hernandez.escuelaarcade.model.HomeViewModel
 import augusto.hernandez.escuelaarcade.model.states.PlaceholderAdapter
-
+/*Este fragmento es el principal, ya que contiene el listado de cursos a los que se
+* puede acceder.*/
 class HomeFragment:Fragment() {
     //Se inicia el viewmodel compartido
     private val viewModel: HomeViewModel by activityViewModels()
@@ -32,6 +33,9 @@ class HomeFragment:Fragment() {
         return fragmentBinding.root
     }
 
+    /*Este, como otros fragmentos, necesitará de un observador para una variable específica que
+    * determinará si se puede renderizar una vista o no. Esto con el propósito de evitar
+    * la activación de una vista con valores nulos.*/
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.apply {
             dataModel = viewModel

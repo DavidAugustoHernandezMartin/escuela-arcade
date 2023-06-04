@@ -19,6 +19,9 @@ import augusto.hernandez.escuelaarcade.model.states.Resource
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.snackbar.Snackbar
 
+/*Una vez que se ha realizado el Login se entra directamente ésta actividad. Básicamente consiste
+* en un DrawerlLayout que contiene un componente NavigationDrawer. Éste componente tiene los
+* vínculos a los fragmentos de estadísticas, de perfil y el fragmento Home, que será el inicial.*/
 
 class MainActivity : AppCompatActivity() {
 
@@ -73,7 +76,9 @@ class MainActivity : AppCompatActivity() {
             app = this@MainActivity
             dataModel = viewModel
         }
-
+        /*En estas implementaciones se trabajará con datos observables desde un viewModel.
+        * Ésto permitirá mejor control de la lógica y la conservación de los estados
+        * independientemente del ciclo de vida del conponente que los utilice.*/
         viewModel.loginStatus.observe(this) { resource ->
             when (resource) {
                 is Resource.Success -> {

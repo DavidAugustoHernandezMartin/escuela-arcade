@@ -1,5 +1,9 @@
 package augusto.hernandez.escuelaarcade.model.states
 
+/*Esta clase se utiliza en los viewModel para la asignación de
+* valores observables que puedan ser variables en su connotación.
+* Sirven para poder gestionar los valores correspondientes a los estados
+* de renderización condicional.*/
 sealed class Resource<T>(
     val data: T? = null,
     val message: String? = null
