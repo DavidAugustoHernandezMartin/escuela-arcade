@@ -25,6 +25,5 @@
             android:scaleType="centerInside"
             tools:src="@tools:sample/backgrounds/scenic"
             android:contentDescription="@null" />
-
 </com.google.android.material.card.MaterialCardView>
 </layout>

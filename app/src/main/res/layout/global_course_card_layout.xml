@@ -17,8 +17,9 @@
 
         <ImageView
             android:id="@+id/courseImage"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:padding="5dp"
             android:contentDescription="@null"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,9 +34,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/nombre_del_curso"
             android:padding="8dp"
-            android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@id/courseImage"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
@@ -45,22 +44,19 @@
             android:layout_marginStart="8dp"
             android:text="@string/numero_de_lecciones"
             android:padding="8dp"
-            android:textColor="?android:textColorSecondary"
             app:layout_constraintStart_toEndOf="@id/courseImage"
             app:layout_constraintTop_toBottomOf="@id/courseTitle" />
 
         <TextView
             android:id="@+id/courseDescription"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:ellipsize="end"
             android:padding="8dp"
             android:text="@string/descripcion_curso"
             android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@id/courseImage"
             app:layout_constraintTop_toBottomOf="@id/courseLessons" />
 

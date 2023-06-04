@@ -26,13 +26,9 @@ class ProfileFragment:Fragment() {
         val fragmentBinding = ProfileFragmentBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         binding.lifecycleOwner = this
-        return fragmentBinding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         binding.apply {
             dataModel = viewModel
         }
+        return fragmentBinding.root
     }
 }
