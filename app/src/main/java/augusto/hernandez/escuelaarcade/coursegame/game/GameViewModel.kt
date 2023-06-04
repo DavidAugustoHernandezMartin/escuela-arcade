@@ -38,6 +38,15 @@ class GameViewModel:ViewModel(){
         wordslist.add(addWord(tempWord))
     }
 
+    fun clearData(){
+        _score.value = 0
+        _currentWordCount.value = 0
+        wordslist.clear()
+        _currentScrambledWord.value = ""
+        _currentHint.value =""
+    }
+
+
     private fun getWord():CharArray{
         currentWord = _game.value?.get(RESPUESTAS)?.get(currentWordCount.value!!) ?: ""
         _currentHint.value = _game.value?.get(PREGUNTAS)?.get(currentWordCount.value!!) ?: ""

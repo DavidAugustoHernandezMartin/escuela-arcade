@@ -22,6 +22,7 @@
     <string name="leccion"><b>Leccion %1$d</b></string>
     <string name="jugar">JUGAR</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae velit vel risus suscipit efficitur non sit amet leo. Mauris commodo ipsum vel dui efficitur, id egestas orci posuere. Vestibulum non ante semper risus scelerisque laoreet. Etiam nec metus et libero porttitor blandit at nec nibh. Mauris et accumsan turpis. Pellentesque porttitor ante vulputate, luctus est at, euismod nisi. Etiam et dui hendrerit, pulvinar tortor at, rutrum nisi. Morbi eu sodales turpis, ut ornare ante. Sed placerat felis vitae lorem dapibus, vitae fringilla quam scelerisque. Vivamus maximus sem vestibulum felis mollis, viverra accumsan nisl molestie. Sed id placerat orci, quis finibus tortor. Donec non diam a felis molestie vulputate at tristique orci. Suspendisse at mi at dui mattis rhoncus. Maecenas a orci varius, mollis neque in, tincidunt ligula. Curabitur ante quam, suscipit quis dui quis, dapibus eleifend odio. Praesent luctus dolor sit amet nisl ultricies, non gravida leo suscipit.</string>
+    <string name="sincronizar_sesion">Sincronizar Sesión</string>
 
     <!-- Strings de juego -->
     <string name="skip">Saltar intento</string>
@@ -34,9 +35,12 @@
     <string name="you_scored">¡Has ganado %1$d puntos!. La media para pasar es %2$d </string>
     <string name="exit">Salir</string>
     <string name="imagen_de_fondo">Imágen de fondo</string>
+    <string name="word_count">%1$d de %2$d</string>
+    <string name="current_score">Puntos acumulados: %1$d</string>
 
     <!-- Strings de datos obtenidos -->
     <string name="stat_tab_contents"><b>Progreso:</b> %1$s \n\n<b>Ultima leccion:</b> %2$s \n\n<b>Maxima puntuacion obtenida:</b> %3$s</string>
     <string name="profile_contents"><b>Cursos activos:</b> %1$s \n\n<b>lecciones totales aprobadas:</b> %2$s \n\n<b>Es autor:</b> %3$s </string>
+
 
 </resources>

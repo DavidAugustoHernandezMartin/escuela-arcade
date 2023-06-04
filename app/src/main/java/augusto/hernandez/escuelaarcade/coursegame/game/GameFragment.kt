@@ -51,10 +51,10 @@ class GameFragment: Fragment() {
             binding.textViewUnscrambledWord.text = newWord ?: "_"
         }
         binding.gameViewModel!!.currentWordCount.observe(viewLifecycleOwner){ newWordCount ->
-            binding.wordCount.text = newWordCount.toString()
+            binding.wordCount.text = getString(R.string.word_count,newWordCount, MAX_NO_OF_WORDS)
         }
         binding.gameViewModel!!.score.observe(viewLifecycleOwner){ newScore ->
-            binding.score.text = newScore.toString()
+            binding.score.text = getString(R.string.current_score,newScore)
         }
         binding.gameViewModel!!.currentHint.observe(viewLifecycleOwner){ instructions ->
             binding.textViewInstructions.text = instructions.toString()
@@ -98,7 +98,7 @@ class GameFragment: Fragment() {
                 Snackbar.make(binding.root,"No se han podido sincronizar datos de la lección actual:  ${courseViewModel.leccionActual}",Snackbar.LENGTH_LONG).show()
             }
         }
-        viewModel.reinitializationData()
+        viewModel.clearData()
         setErrorTextField(false)
         findNavController().navigate(R.id.action_gameFragment_to_courseListFragment)
     }
